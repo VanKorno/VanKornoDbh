@@ -41,3 +41,23 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }
+
+val buildDirectory = layout.buildDirectory.get()
+
+// Add the following block to ensure the library is published correctly
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            afterEvaluate {
+                from(components["release"]) // This part might still not work
+
+                // Alternatively, specify the AAR directly
+                artifact("$buildDirectory/outputs/aar/${project.name}-release.aar")
+            }
+
+            groupId = "com.vankorno"
+            artifactId = "vankornodbh"
+            version = "1.0.0"
+        }
+    }
+}
