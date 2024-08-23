@@ -42,7 +42,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }
 
-val versionTag = "1.0.2"
+val versionTag = "1.0.3"
 
 val buildDirectory = layout.buildDirectory.get()
 

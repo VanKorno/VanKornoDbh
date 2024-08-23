@@ -4,7 +4,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import com.vankorno.vankornodbh.ValDB.*
 import com.vankorno.vankornodbh.data.DbTableAndEntt
 
 open class HelperDB(                                             context: Context,
@@ -140,6 +139,50 @@ open class HelperDB(                                             context: Contex
     ): Long = readDB("getLong()", 0L) { 
         GetSet(it).getLong(whichTable, column, whereClause, whereArg)
     }
+    
+    // ============================== SETTERS ===========================================
+    
+    fun set(                                                                    value: String,
+                                                                           whichTable: String,
+                                                                               column: String,
+                                                                          whereClause: String,
+                                                                             whereArg: String
+    ) {
+        writeDB("set()") {
+            GetSet(it).set(value, whichTable, column, whereClause, whereArg)
+        }
+    }
+    fun set(                                                                     value: Int,
+                                                                            whichTable: String,
+                                                                                column: String,
+                                                                           whereClause: String,
+                                                                              whereArg: String
+    ) {
+        writeDB("set()") {
+            GetSet(it).set(value, whichTable, column, whereClause, whereArg)
+        }
+    }
+    fun set(                                                                    value: Boolean,
+                                                                           whichTable: String,
+                                                                               column: String,
+                                                                          whereClause: String,
+                                                                             whereArg: String
+    ) {
+        writeDB("set()") {
+            GetSet(it).set(value, whichTable, column, whereClause, whereArg)
+        }
+    }
+    fun set(                                                                    value: Long,
+                                                                           whichTable: String,
+                                                                               column: String,
+                                                                          whereClause: String,
+                                                                             whereArg: String
+    ) {
+        writeDB("set()") {
+            GetSet(it).set(value, whichTable, column, whereClause, whereArg)
+        }
+    }
+    
     
     
     
