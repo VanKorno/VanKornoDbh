@@ -42,37 +42,20 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }
 
-val versionTag = "0.0.15"
+val versionTag = "0.0.16"
 
 val buildDirectory = layout.buildDirectory.get()
 
-// ensure the library is published correctly
-publishing {
+
+publishing {    /* to ensure that the library is published correctly */
     publications {
         create<MavenPublication>("release") {
             afterEvaluate {
                 from(components.findByName("release"))
-
-                // Alternatively, specify the AAR directly
-                // artifact("$buildDirectory/outputs/aar/${project.name}-release.aar")
             }
-
             groupId = "com.vankorno"
             artifactId = "vankornodbh"
             version = versionTag
         }
     }
 }
-
-/*// For local publishing
-afterEvaluate {
-    android.libraryVariants.forEach { variant ->
-        publishing.publications.create<MavenPublication>(variant.name) {
-            from(components.findByName(variant.name))
-
-            groupId = "com.vankorno"
-            artifactId = "vankornodbh"
-            version = versionTag
-        }
-    }
-}*/
