@@ -57,7 +57,7 @@ publishing {
 
             groupId = "com.vankorno"
             artifactId = "vankornodbh"
-            version = "1.0.0"
+            version = "0.0.12"
         }
     }
 }
