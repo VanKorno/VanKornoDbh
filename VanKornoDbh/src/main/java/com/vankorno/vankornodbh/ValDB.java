@@ -19,7 +19,7 @@ dbCreateT="CREATE TABLE ",
 dbDrop="DROP TABLE IF EXISTS ",
 
     // TABLES
-TTTMisc="TTTMisc", TTTUndo="TTTUndo", TTTStats="TTTStats",
+TTTMisc="TTTMisc", TTTUndo="TTTUndo", TTTSettings="TTTSettings", TTTStats="TTTStats",
 
     // COLUMNS
 Bool1="Bool1",  Long1="Long1",   Float1="Float1",
