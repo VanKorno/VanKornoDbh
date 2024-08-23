@@ -7,16 +7,16 @@ import android.util.Log
 import com.vankorno.vankornodbh.ValDB.*
 import com.vankorno.vankornodbh.data.DbTableAndEntt
 
-open class HelperDB(                                                  context: Context,
-                                                                      dbName: String,
-                                                                   dbVersion: Int,
-                                                        private val entities: Array<DbTableAndEntt>,
-                                                           val onCreateStart: ()->Unit = {},
-                                                          val onCreateFinish: ()->Unit = {},
-                                                               val onUpgrade: ()->Unit = {}
+open class HelperDB(                                             context: Context,
+                                                                 dbName: String,
+                                                              dbVersion: Int,
+                                                   private val entities: Array<DbTableAndEntt>,
+                                                      val onCreateStart: (SQLiteDatabase)->Unit = {},
+                                                     val onCreateFinish: (SQLiteDatabase)->Unit = {},
+                                                          val onUpgrade: (SQLiteDatabase)->Unit = {}
 ) : SQLiteOpenHelper(context, dbName, null, dbVersion) {
-    private val tag = "HelperDB"
-    private val dbLock = Any()
+    val tag = "HelperDB"
+    val dbLock = Any()
     
     
     override fun onCreate(                                                      db: SQLiteDatabase
@@ -25,11 +25,13 @@ open class HelperDB(                                                  context: C
         Log.d(tag, "onCreate runs")
         // endregion
         synchronized(dbLock) {
-            onCreateStart()
+            onCreateStart(db)
+            
+            val miscDB = MiscDB(db)
             entities.forEach {
-                db.execSQL(MiscDB(db).buildQuery(it.whichTable, it.entity))
+                db.execSQL(miscDB.buildQuery(it.whichTable, it.entity))
             }
-            onCreateFinish()
+            onCreateFinish(db)
         }
     }
     
@@ -43,7 +45,7 @@ open class HelperDB(                                                  context: C
         Log.d(tag, "onUpgrade runs")
         // endregion
         synchronized(dbLock) {
-            onUpgrade()
+            onUpgrade(db)
         }
     }
     
@@ -69,7 +71,7 @@ open class HelperDB(                                                  context: C
         }
     }
     
-    private inline fun <T> readDB(
+    inline fun <T> readDB(
                                                                       logTxt: String,
                                                                 defaultValue: T,
                                                                       action: (SQLiteDatabase) -> T
@@ -85,7 +87,7 @@ open class HelperDB(                                                  context: C
                     }
         }
     }
-    private inline fun <T> readWriteDB(
+    inline fun <T> readWriteDB(
                                                                       logTxt: String,
                                                                 defaultValue: T,
                                                                       action: (SQLiteDatabase) -> T
