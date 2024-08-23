@@ -42,7 +42,18 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }
 
-val buildDirectory = layout.buildDirectory.get()
+/*publishing {
+    publications {
+        create<MavenPublication>("release") {
+            from(components["release"])
+            groupId = "com.vankorno"
+            artifactId = "vankornodbh"
+            version = "0.0.12"
+        }
+    }
+}*/
+
+/*val buildDirectory = layout.buildDirectory.get()
 
 // Add the following block to ensure the library is published correctly
 publishing {
@@ -60,4 +71,4 @@ publishing {
             version = "0.0.12"
         }
     }
-}
+}*/
