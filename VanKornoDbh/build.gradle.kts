@@ -43,7 +43,7 @@ dependencies {
 }
 
 
-val versionTag = "1.0.5"
+val versionTag = "1.0.6"
 //val buildDirectory = layout.buildDirectory.get()
 
 publishing {    /* to ensure that the library is published correctly */
